@@ -25,6 +25,11 @@ button {
     border: 1px solid wheat;
 }
 
+p {
+    margin: 0;
+    padding: 0;
+}
+
 th,
 td {
   text-align: center;
@@ -86,17 +91,6 @@ select {
     cursor: pointer;
 }
 
-tr.active select {
-    border: 2px solid rgb(140, 0, 255);
-    box-shadow: 0 0 10px 0 rgb(140, 0, 255);
-}
-
-select:focus {
-    outline: none;
-    border-color: #a78bce;
-    filter: drop-shadow(0 0 0.75rem rgba(155, 13, 199, 0.581));
-}
-
 #bg-container {
     min-height: 80vh;
     width: 520px;
@@ -121,10 +115,35 @@ select:focus {
 }
 
 input[type="color"] {
-    width: 1.5rem;
-    height: 1.5rem;
-    background-color: transparent;
-    border: 0;
+    appearance: none;
+    -webkit-appearance: none;
+
+    width: 20px;
+    height: 20px;
+    padding: 0;
+
+    border: 1px solid #000000;
+    border-radius: 50%;
+    overflow: hidden;
+
+    cursor: pointer;
+    background: transparent;
+}
+
+/* Chrome, Edge, Safari */
+input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+input[type="color"]::-webkit-color-swatch {
+    border: none;
+    border-radius: 50%;
+}
+
+/* Firefox */
+input[type="color"]::-moz-color-swatch {
+    border: none;
+    border-radius: 50%;
 }
 
 .score-change {
@@ -133,6 +152,15 @@ input[type="color"] {
     animation: fadeOut 1.5s ease 15s forwards;
 }
 
+button:hover {
+    background-color: black;
+    box-shadow: 0 0 0.5rem 0 white;
+}
+
+button:active {
+    border-color: rgb(98, 0, 255);
+    box-shadow: 0 0 0.5rem 0 rgb(98, 0, 255);
+}
 
 @keyframes fadeOut {
     to {
@@ -144,12 +172,13 @@ input[type="color"] {
 @media (max-width: 600px) {
     body,
     button{
-        font-size: 0.9rem;
+        font-size: 1rem;
     }
 
-    #score-container td {
-        max-width: 7vw;
+    h1 {
+        width: 60vw;
     }
+
     #bg-container {
         width: 95vw;
         padding: 5px;

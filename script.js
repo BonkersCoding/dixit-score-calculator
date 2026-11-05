@@ -10,19 +10,21 @@ const removeBtn = document.getElementById("remove-player");
 const restartBtn = document.getElementById("restart");
 let numberOfPlayers = 4;
 let activePlayer = 0;
-let colours = ["#003cff", "#ff0000", "#ffd900", "#00ff5e", "#ff005d", "#ff0095"];
+let colours = [];
 let names = [];
 let playerScores = [];
 let played = [];
 let voted = [];
 let scoreChange = [];
+let winCon = false;
 
 
 function generateOptions(number) {
     for (let i = 0; i < number; i++) {
+        const randomColor = "#" + Math.floor(Math.random()*16777215).toString(16).padStart(6, "0");
         const row = optionsTable.insertRow();
         row.innerHTML = `
-            <td><input type="color" value="${colours[i]}"/></td>
+            <td><input type="color" value="${randomColor}"/></td>
             <td><input type="text" value="Player ${i+1}"/></td>`
     }
 }
@@ -146,12 +148,21 @@ function changeActiveIndicator(number) {
           .classList.add("active");
 }
 
+function winCheck(arr) {
+    winCon = arr.some(x => x >29);
+    if (winCon) {
+        const winIndex = arr.indexOf(Math.max(...arr)) + 1;
+        alert(`player ${winIndex} won!`);
+    }
+}
+
 addBtn.addEventListener("click", () => {
     const row = optionsTable.insertRow();
-    row.innerHTML = `
-        <td><input type="color" /></td>
-        <td><input type="text" value="Player ${numberOfPlayers + 1}"/></td>`
+    const randomColor = "#" + Math.floor(Math.random()*16777215).toString(16).padStart(6, "0");
     numberOfPlayers += 1;
+    row.innerHTML = `
+        <td><input type="color" value="${randomColor}"/></td>
+        <td><input type="text" value="Player ${numberOfPlayers}"/></td>`
     numberDisplay.textContent = numberOfPlayers;
 })
 
@@ -166,20 +177,19 @@ startBtn.addEventListener("click", () => {
     generateChoices(numberOfPlayers);
     toggleVisibility(optionsContainer);
     toggleVisibility(choiceContainer);
-    generateScoresheet(numberOfPlayers);
 })
 
 calcBtn.addEventListener("click",() => {
     getData(numberOfPlayers);
     calculateScores();
     updateScores();
+    winCheck(playerScores);
     activePlayer = (activePlayer + 1) % numberOfPlayers;
     changeActiveIndicator(activePlayer);
 })
 
 restartBtn.addEventListener("click", () => {
     playerScores = [];
-    const rowsToDelete = scoreTable.rows.length;  
     deleteRows(numberOfPlayers, choiceTable);
     generateChoices(numberOfPlayers);
     activePlayer = 0;
