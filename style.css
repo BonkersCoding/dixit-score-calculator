@@ -130,6 +130,15 @@ input[type="color"] {
 .score-change {
     font-size: 0.8rem;
     color: green;
+    animation: fadeOut 1.5s ease 15s forwards;
+}
+
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
 }
 
 @media (max-width: 600px) {
