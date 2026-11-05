@@ -8,9 +8,9 @@ body {
     font-family: "Trebuchet MS", "Segoe UI", "Avenir Next", "Ubuntu", system-ui, sans-serif;
     font-size: 1.2rem;
     color: white;
-    font-weight: 300;
     font-size: 1.05rem;
-    letter-spacing: 0.01em;  
+    letter-spacing: 0.01em; 
+    text-align: center; 
 }
 
 button {
@@ -45,12 +45,7 @@ td {
     align-items: center;
 }
 
-tr.active td:first-child {
-    font-weight: bold;
-    font-size: 1.2rem;
-}
-
-tr.active td:last-child > input {
+tr.active td:last-child > select {
     display: none;
 }
 
@@ -77,6 +72,31 @@ tr.active td:last-child::before {
   }
 }
 
+select {
+    width: 55px;
+    padding: 5px 5px;
+    font: inherit;
+    font-size: 1.1rem;
+    text-align: center;
+
+    color: #2e283a;
+    background: #f8f6fc;
+    border: 1px solid #ded6ed;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+tr.active select {
+    border: 2px solid rgb(140, 0, 255);
+    box-shadow: 0 0 10px 0 rgb(140, 0, 255);
+}
+
+select:focus {
+    outline: none;
+    border-color: #a78bce;
+    filter: drop-shadow(0 0 0.75rem rgba(155, 13, 199, 0.581));
+}
+
 #bg-container {
     min-height: 80vh;
     width: 520px;
@@ -92,18 +112,12 @@ tr.active td:last-child::before {
     margin: 20px 0;
     padding: 20px;
     border-radius: 10px;
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: rgba(0, 0, 0, 0.95);
 }
 
 .hidden {
     display: none;
     opacity: 0;
-    transform: translateY(8px);
-
-    transition:
-        opacity 0.3s ease,
-        transform 0.3s ease,
-        display 0.3s allow-discrete;
 }
 
 input[type="color"] {
@@ -111,5 +125,25 @@ input[type="color"] {
     height: 1.5rem;
     background-color: transparent;
     border: 0;
+}
+
+.score-change {
+    font-size: 0.8rem;
+    color: green;
+}
+
+@media (max-width: 600px) {
+    body,
+    button{
+        font-size: 0.9rem;
+    }
+
+    #score-container td {
+        max-width: 7vw;
+    }
+    #bg-container {
+        width: 95vw;
+        padding: 5px;
+}
 }
 
