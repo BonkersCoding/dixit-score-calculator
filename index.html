@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <title>Dixit score tracker</title>
+    <link rel="icon" type="image/x-icon" href="/assets/heart.png">
+</head>
+<body>
+    <div class="vbox" id="bg-container">
+        <h1>DIXIT SCORE TRACKER</h1>
+        <div class="vbox" id="options-container">
+            <div class="hbox" id="options-bar">
+                <p>Players:</p>
+                <button id="remove-player">-</button>
+                <div id="number-of-players"></div>
+                <button id="add-player">+</button>
+            </div>
+            <table id="options-table">
+                <thead>
+                    <tr>
+                        <th>Color</th>
+                        <th>Name</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+                <button id="start-game">New game</button>
+        </div>
+        <div class="vbox hidden" id="choice-container">
+            <table id="choice-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Score</th>
+                        <th>Played</th>
+                        <th>Voted</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <div class="hbox" id="options-bar">
+                <button id="calculate">Calculate scores</button>
+                <button id="restart">Restart</button>
+            </div>
+        </div>
+        <div class="vbox hidden" id="score-container">
+            <table id="score-table"></table>
+        </div>
+    </div>
+</body>
+</html>
