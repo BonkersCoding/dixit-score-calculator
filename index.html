@@ -10,7 +10,7 @@
 </head>
 <body>
     <div class="vbox" id="bg-container">
-        <h1>DIXIT SCORE TRACKER</h1>
+        <h1 id="title">DIXIT SCORE TRACKER</h1>
         <div class="vbox" id="options-container">
             <div class="hbox" id="options-bar">
                 <p>Players:</p>
@@ -29,14 +29,15 @@
             </table>
                 <button id="start-game">New game</button>
         </div>
+        <div class="hidden" id="gamestate"></d>
         <div class="vbox hidden" id="choice-container">
             <table id="choice-table">
                 <thead>
                     <tr>
                         <th>Name</th>
                         <th>Score</th>
-                        <th>Played</th>
-                        <th>Voted</th>
+                        <th>Played card</th>
+                        <th>Voted for</th>
                     </tr>
                 </thead>
                 <tbody></tbody>

@@ -4,10 +4,12 @@ const startBtn = document.getElementById("start-game");
 const calcBtn = document.getElementById("calculate");
 const choiceContainer = document.getElementById("choice-container");
 const optionsContainer = document.getElementById("options-container");
+const gamestateContainer = document.getElementById("gamestate");
 const numberDisplay = document.getElementById("number-of-players");
 const addBtn = document.getElementById("add-player");
 const removeBtn = document.getElementById("remove-player");
 const restartBtn = document.getElementById("restart");
+const title = document.getElementById("title");
 let numberOfPlayers = 4;
 let activePlayer = 0;
 let colours = [];
@@ -42,17 +44,21 @@ function getOptions(number) {
     }
 }
 
-function generateNumberOptions(number) {
+function generateNumberOptions(number, name, index) {
     let optionString = "";
     for (let i = 0; i < number; i++) {
-        optionString += `<option value="${i + 1}">${i + 1}</option>`     
+        optionString += `<label>
+                            <input type="radio" name="${name}${index}" value="${i+1}">
+                            <span>${i+1}</span>
+                         </label>`     
     }
     return optionString;
 }
 
 function generateChoices(number) {
-    const numberOptions = generateNumberOptions(number);
     for (let i = 0; i < number; i++) {
+        const playedOptions = generateNumberOptions(number, "played", i);
+        const votedOptions = generateNumberOptions(number, "voted", i);
         playerScores.push(0);
         const colour = colours[i];
         const name = names[i];
@@ -60,8 +66,8 @@ function generateChoices(number) {
         row.innerHTML = `        
             <td>${name}</td>
             <td></td>
-            <td><select id="played">${numberOptions}</select></td>
-            <td><select id="voted">${numberOptions}</select></td>`
+            <td><div id="played" class="hbox">${playedOptions}</div></td>
+            <td><div id="voted" class="hbox">${votedOptions}</div></td>`
         row.cells[1].textContent = playerScores[i];
         row.cells[0].style.borderBottom = `1px solid ${colour}`;
         if (i === activePlayer) {
@@ -177,6 +183,8 @@ startBtn.addEventListener("click", () => {
     generateChoices(numberOfPlayers);
     toggleVisibility(optionsContainer);
     toggleVisibility(choiceContainer);
+    toggleVisibility(gamestateContainer);
+    toggleVisibility(title);
 })
 
 calcBtn.addEventListener("click",() => {
